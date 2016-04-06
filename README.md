@@ -22,7 +22,7 @@ $ brew update
 $ brew install carthage
 ```
 
-To integrate ZYThumbnailTableView into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYThumbnailTableView/tree/Xcode7.3-Handle) into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
 github "Dershowitz011/ZYYT"
