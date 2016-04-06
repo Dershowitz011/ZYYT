@@ -6,7 +6,6 @@
 
 You can now integrate [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYThumbnailTableView/tree/Xcode7.3-Handle) easily using [Carthage](https://github.com/Carthage/Carthage)
 
-
 #Usage
 
 Refer to the documentation as given in [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYThumbnailTableView/tree/Xcode7.3-Handle) by liuzhiyi1992.
