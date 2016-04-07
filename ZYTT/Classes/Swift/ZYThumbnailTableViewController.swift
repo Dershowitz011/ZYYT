@@ -8,10 +8,10 @@
 
 import UIKit
 
-typealias ConfigureTableViewCellBlock = () -> UITableViewCell?
-typealias UpdateTableViewCellBlock = (cell: UITableViewCell, indexPath: NSIndexPath) -> Void
-typealias CreateTopExpansionViewBlock = (indexPath: NSIndexPath) -> UIView?
-typealias CreateBottomExpansionViewBlock = (indexPath: NSIndexPath) -> UIView?
+public typealias ConfigureTableViewCellBlock = () -> UITableViewCell?
+public typealias UpdateTableViewCellBlock = (cell: UITableViewCell, indexPath: NSIndexPath) -> Void
+public typealias CreateTopExpansionViewBlock = (indexPath: NSIndexPath) -> UIView?
+public typealias CreateBottomExpansionViewBlock = (indexPath: NSIndexPath) -> UIView?
 
 
 let NOTIFY_NAME_DISMISS_PREVIEW = "NOTIFY_NAME_DISMISS_PREVIEW"
@@ -104,22 +104,22 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
     
     
     //MARK: BLOCKS
-    lazy var configureTableViewCellBlock: ConfigureTableViewCellBlock = {
+  public lazy var configureTableViewCellBlock: ConfigureTableViewCellBlock = {
         return {
             assertionFailure("ERROR:  -  You must configure the configureTableViewCellBlock")
             return nil;
         }
     }()
     
-    lazy var updateTableViewCellBlock: UpdateTableViewCellBlock = {
+    public lazy var updateTableViewCellBlock: UpdateTableViewCellBlock = {
         return {
             print("ERROR: You must configure the updateTableViewCellBlock")
         }
     }()
     
-    var createTopExpansionViewBlock: CreateTopExpansionViewBlock!
+   public var createTopExpansionViewBlock: CreateTopExpansionViewBlock!
     
-    var createBottomExpansionViewBlock: CreateBottomExpansionViewBlock!
+    public var createBottomExpansionViewBlock: CreateBottomExpansionViewBlock!
     
     
     //MARK: FUNCTION
