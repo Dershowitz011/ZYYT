@@ -18,7 +18,7 @@ let NOTIFY_NAME_DISMISS_PREVIEW = "NOTIFY_NAME_DISMISS_PREVIEW"
 var KEY_INDEXPATH = "KEY_INDEXPATH"
 
 
-@objc protocol ZYThumbnailTableViewControllerDelegate {
+@objc public protocol ZYThumbnailTableViewControllerDelegate {
     optional func zyTableViewDidSelectRow(tableView: UITableView, indexPath: NSIndexPath)
 }
 
@@ -41,24 +41,24 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
     /**
      tableView cell height
      */
-    var tableViewCellHeight: CGFloat = CELL_HEIGHT_DEFAULT
+    public  var tableViewCellHeight: CGFloat = CELL_HEIGHT_DEFAULT
     //todo数据源要不要规定成字典数组?//不需要
     /**
      tableView dataList
      */
-    var tableViewDataList = NSArray()
+    public var tableViewDataList = NSArray()
     /**
      your diy tableView cell ReuseIdentifier
      */
-    var tableViewCellReuseId = "diyCell"
+    public var tableViewCellReuseId = "diyCell"
     /**
      tableView backgroundColor
      */
-    var tableViewBackgroudColor = TABLEVIEW_BACKGROUND_COLOR_DEFAULT
+    public var tableViewBackgroudColor = TABLEVIEW_BACKGROUND_COLOR_DEFAULT
     /**
      give me your inputView, I will not allow the keyboard cover him. (ZYKeyboardUtil)
      */
-    var keyboardAdaptiveView: UIView?
+    public var keyboardAdaptiveView: UIView?
     
     
     private var blurTintColor = BLUR_BACKGROUND_TINT_COLOR_DEFAULT
@@ -122,10 +122,10 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
     var createBottomExpansionViewBlock: CreateBottomExpansionViewBlock!
     
     
-//MARK: FUNCTION
+    //MARK: FUNCTION
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.mainTableView = UITableView(frame: self.view.frame)
         
         configureKeyboardUtil()
@@ -137,7 +137,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         guardExpansionViewBlock()
     }
     
-    func guardExpansionViewBlock() {
+    public  func guardExpansionViewBlock() {
         if createTopExpansionViewBlock == nil {
             createTopExpansionViewBlock = {
                 print("WARNNING: You have no configure the createTopExpansionViewBlock")
@@ -161,18 +161,18 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         resignNotification()
     }
     
-    func registerNotification() {
+    public func registerNotification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ZYThumbnailTableViewController.dismissPreview), name: NOTIFY_NAME_DISMISS_PREVIEW, object: nil)
     }
     
-    func resignNotification() {
+    public func resignNotification() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     /**
      used ZYKeyboardUtil githubDemo: https://github.com/liuzhiyi1992/ZYKeyboardUtil
      */
-    func configureKeyboardUtil() {
+    public func configureKeyboardUtil() {
         guard self.keyboardAdaptiveView != nil else {
             return
         }
@@ -195,7 +195,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func configureTableView() {
+    public func configureTableView() {
         self.view.addSubview(mainTableView)
         
         mainTableView.backgroundColor = tableViewBackgroudColor
@@ -209,7 +209,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         return tableViewDataList.count
     }
     
-   public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = tableViewCellReuseId
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
         if cell == nil {
@@ -239,7 +239,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         return tableViewCellHeight
     }
     
-   public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell = cellDictionary.valueForKey("\(indexPath.row)") as? UITableViewCell
         if let nonNilSelectedCell = selectedCell {
             //计算高度
@@ -264,7 +264,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func calculateCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+    public func calculateCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         let tempConstraint = NSLayoutConstraint(item: cell.contentView,
                                                 attribute: NSLayoutAttribute.Width,
                                                 relatedBy: NSLayoutRelation.Equal,
@@ -279,7 +279,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         previewCell(cell, indexPath: indexPath)
     }
     
-    func previewCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+    public func previewCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         //create previewCover
         let previewCover = UIImageView(frame: mainTableView.frame)
         
@@ -338,11 +338,11 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func tapPreviewCover(gesture: UITapGestureRecognizer) {
+    public func tapPreviewCover(gesture: UITapGestureRecognizer) {
         dismissPreview()
     }
     
-    func dismissPreview() {
+    public func dismissPreview() {
         clickIndexPathRow = nil
         //todo 这里给开发者一个选择，要动画过程还是立即完成
         //        mainTableView.reloadData()
@@ -356,7 +356,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func panThumbnailView(gesture: UIPanGestureRecognizer) {
+    public func panThumbnailView(gesture: UIPanGestureRecognizer) {
         let thumbnailViewHeight = gesture.view!.bounds.height
         let gestureTranslation = gesture.translationInView(gesture.view)
         let thresholdValue = thumbnailViewHeight * 0.3
@@ -383,7 +383,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func shock(view: UIView, type: String) {
+    public func shock(view: UIView, type: String) {
         //超出tableview范围不shock
         var expandShockAmplitude: CGFloat!
         let convertRect = view.superview?.convertRect(view.frame, toView: self.view)
@@ -430,7 +430,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func layoutTopView(indexPath: NSIndexPath) {
+    public func layoutTopView(indexPath: NSIndexPath) {
         let contentView = thumbnailView.subviews.first
         let nullableTopView = createTopExpansionViewBlock(indexPath: indexPath)
         guard let topView = nullableTopView else {
@@ -461,7 +461,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         shock(thumbnailView, type: TYPE_EXPANSION_VIEW_TOP)
     }
     
-    func layoutBottomView(indexPath: NSIndexPath) {
+    public func layoutBottomView(indexPath: NSIndexPath) {
         let contentView = thumbnailView.subviews.first
         let nullableBottomView = createBottomExpansionViewBlock(indexPath: indexPath)
         guard let bottomView = nullableBottomView else {
@@ -495,7 +495,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         shock(thumbnailView, type: TYPE_EXPANSION_VIEW_BOTTOM)
     }
     
-    func handleOverFlowScreen(handleView: UIView) {
+    public func handleOverFlowScreen(handleView: UIView) {
         let keyWindow = UIApplication.sharedApplication().keyWindow
         let convertRect = handleView.superview?.convertRect(handleView.frame, toView: keyWindow)
         guard let nonNilConvertRect = convertRect else {
@@ -510,7 +510,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func movingPath(startPoint: CGPoint, keyPoints: CGPoint...) -> UIBezierPath {
+    public func movingPath(startPoint: CGPoint, keyPoints: CGPoint...) -> UIBezierPath {
         let path = UIBezierPath()
         path.moveToPoint(startPoint)
         for point in keyPoints {
@@ -520,7 +520,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
     }
     
     
-    func reloadMainTableView() {
+    public func reloadMainTableView() {
         mainTableView.reloadData()
     }
     
@@ -528,7 +528,7 @@ public class ZYThumbnailTableViewController: UIViewController, UITableViewDataSo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
 
