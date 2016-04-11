@@ -15,7 +15,7 @@ Please do refer to the documentation as given in [ZYThumbnailTableView](https://
 ### Setting up with Carthage
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
 
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+You can install Carthage as shown in [Homebrew](http://brew.sh/) using the following command:
 
 ```bash
 $ brew update
