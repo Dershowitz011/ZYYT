@@ -8,7 +8,7 @@ You can now integrate [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYT
 
 #Usage
 
-Please refer to the documentation as given in [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYThumbnailTableView/tree/Xcode7.3-Handle) by [liuzhiyi1992](https://github.com/liuzhiyi1992)
+Please do refer to the documentation as given in [ZYThumbnailTableView](https://github.com/liuzhiyi1992/ZYThumbnailTableView/tree/Xcode7.3-Handle) by [liuzhiyi1992](https://github.com/liuzhiyi1992)
 
 #Installation
 
